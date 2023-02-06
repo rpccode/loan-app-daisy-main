@@ -11,12 +11,12 @@ const ListadoGastos = ({
 }) => {
 
     return (
-        <div className='listado-gastos contenedor'>
+        <div className='mt-4 '>
 
             {
                 filtro ? (
                     <>
-                        <h2 className='text-4xl'>{gastosfiltrados.length ? 'Gastos' : 'No hay Gastos Aún'}</h2>
+                        {/* <h2 className='text-xl'>{gastosfiltrados.length ? 'Gastos' : 'No hay Gastos Aún'}</h2> */}
 
                         {gastosfiltrados.map(gasto => (
                             <Gasto
@@ -33,7 +33,7 @@ const ListadoGastos = ({
 
                 ) : (
                     <>
-                        <h2 className='text-4xl'>{gastos.length ? 'Gastos' : 'No hay Gastos Aún'}</h2>
+                        {/* <h2 className='text-4xl mb-2'>{gastos.length ? 'Gastos' : 'No hay Gastos Aún'}</h2> */}
 
                         {gastos.map(gasto => (
                             <Gasto

@@ -1,19 +1,27 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
+import TitleCard from '../../../components/Cards/TitleCard';
 import ControlPresupuesto from './ControlPresupuesto'
 import NuevoPresupuesto from './NuevoPresupuesto'
 
 const Header = () => {
     const { isValidPresupuesto } = useSelector((state) => state.Presupuesto);
     return (
-        <header className='bg-primary'>
-            <h1 className='text-4xl'>Planificador de Gastos</h1>
+        <>
+
             {isValidPresupuesto ? (
-                <ControlPresupuesto />
+                <div className='md:w-3/4 md:m-auto'>
+                    <TitleCard title="Planificador de Gastos" topMargin="mt-2" >
+                        <ControlPresupuesto />
+                    </TitleCard>
+                </div>
+
             ) : (
-                <NuevoPresupuesto />
+                <TitleCard title="Nuevo Presupuesto" topMargin="mt-2" >
+                    <NuevoPresupuesto />
+                </TitleCard>
             )}
-        </header>
+        </>
     )
 }
 

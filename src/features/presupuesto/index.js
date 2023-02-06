@@ -1,12 +1,13 @@
 import React from 'react'
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from 'react-redux';
+import TitleCard from '../../components/Cards/TitleCard';
 import { MODAL_BODY_TYPES } from '../../utils/globalConstantUtil';
 import { openModal } from '../common/modalSlice';
 import Filtro from "./components/Filtro";
 import Header from "./components/Header"
 import ListadoGastos from "./components/ListadoGastos";
-import { delectGastoById, setGasto } from './gastosSlice';
+import { delectGastoById, GastoActivo, setGasto } from './gastosSlice';
 
 
 import IconoNuevoGasto from "./img/nuevo-gasto.svg"
@@ -37,6 +38,9 @@ const Presupuesto = () => {
     }, []);
     useEffect(() => {
         if (Object.keys(gastoEditar).length > 0) {
+            dispatch(GastoActivo(gastoEditar))
+            dispatch(openModal({ title: "Edita tu Gasto", bodyType: MODAL_BODY_TYPES.GASTO_ADD_NEW }))
+
         }
 
     }, [gastoEditar])
@@ -62,7 +66,13 @@ const Presupuesto = () => {
 
 
     const handleNuevoGasto = () => {
-        dispatch(openModal({ title: "Agrega un Nuevo Gasto", bodyType: MODAL_BODY_TYPES.GASTO_ADD_NEW }))
+
+        if (gastoEditar.length > 0) {
+            dispatch(openModal({ title: "Edita tu Gasto", bodyType: MODAL_BODY_TYPES.GASTO_ADD_NEW }))
+        } else {
+            dispatch(openModal({ title: "Agrega un Nuevo Gasto", bodyType: MODAL_BODY_TYPES.GASTO_ADD_NEW }))
+
+        }
     }
 
     const eliminarGasto = id => {
@@ -71,7 +81,8 @@ const Presupuesto = () => {
 
     console.log(gastos)
     return (
-        <div className=''>
+
+        <>
 
             <Header />
 
@@ -79,10 +90,18 @@ const Presupuesto = () => {
                 (
                     <>
                         <main>
-                            <Filtro
-                                filtro={filtro}
-                                setFiltro={setFiltro}
-                            />
+
+                            <div className='md:w-3/4 md:m-auto'>
+                                <TitleCard title='Filtrar Gastos' topMargin="mt-2" >
+                                    <Filtro
+                                        filtro={filtro}
+                                        setFiltro={setFiltro}
+                                    />
+                                </ TitleCard>
+                            </div>
+
+
+
                             <ListadoGastos
                                 gastos={gastos}
                                 setGastoEditar={setGastoEditar}
@@ -90,6 +109,7 @@ const Presupuesto = () => {
                                 filtro={filtro}
                                 gastosfiltrados={gastosfiltrados}
                             />
+
                         </main>
                         <div htmlFor="my-modal" className="nuevo-gasto">
                             <img src={IconoNuevoGasto} alt="icono nuevo gasto"
@@ -100,8 +120,8 @@ const Presupuesto = () => {
                     </>
                 )}
 
+        </>
 
-        </div>
 
     )
 }

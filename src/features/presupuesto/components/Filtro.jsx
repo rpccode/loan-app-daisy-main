@@ -1,14 +1,37 @@
 import { useEffect, useState } from 'react'
+import SelectBox from '../../../components/Input/SelectBox'
+
+
+
+const periodOptions = [
+    { name: "-- Seleccione --", value: "" },
+    { name: "Ahorro", value: "ahorro" },
+    { name: "Comida", value: "comida" },
+    { name: "Casa", value: "casa" },
+    { name: "Gastos Varios", value: "gastos" },
+    { name: "Ocio", value: "ocio" },
+    { name: "Salud", value: "salud" },
+    { name: "Materiales", value: "materiales" },
+    { name: "Equipos", value: "equipos" },
+    { name: "Subscripciones", value: "subscripciones" },
+    { name: "Transporte o Combustible", value: "transporte" },
+
+
+]
+
 
 const Filtro = ({ filtro, setFiltro }) => {
+    const [gastoObj, setgastoObj] = useState(filtro)
+
     return (
-        <div className='filtros sombra contenedor'>
+        <div className=''>
             <form >
-                <div className='campo'>
-                    <label className='text-2xl md:text-4xl'>Filtrar Gastos</label>
+                <div className='w-full'>
+                    {/* <label className='text-2xl md:text-4xl'>Filtrar Gastos</label> */}
                     <select
                         value={filtro}
                         onChange={e => setFiltro(e.target.value)}
+                        className='select  select-primary   w-full '
                     >
                         <option value="">-- Todas las Categorias --</option>
                         <option value="ahorro">Ahorro</option>
@@ -22,6 +45,7 @@ const Filtro = ({ filtro, setFiltro }) => {
                         <option value="subscripciones">Subscripciones</option>
                         <option value="transporte">Transporte o Combustible</option>
                     </select>
+
                 </div>
             </form>
 

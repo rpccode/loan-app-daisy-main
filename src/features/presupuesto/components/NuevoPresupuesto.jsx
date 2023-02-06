@@ -25,10 +25,10 @@ const NuevoPresupuesto = () => {
         // setIsValidPresupuesto(true);
     };
     return (
-        <div className="contenedor-presupuesto contenedor sombra">
+        <div className="contenedor-presupuesto contenedor ">
             <form onSubmit={handlePresupuesto} className="formulario">
-                <div className="campo">
-                    <label htmlFor="">Definir Presupuesto</label>
+                <div className="campo text-4xl ">
+                    <label htmlFor="" className="text-2xl md:text-4xl text-primary  font-semibold">Definir Presupuesto</label>
                     <input
                         type="number"
                         className="nuevo-presupuesto"
@@ -37,7 +37,7 @@ const NuevoPresupuesto = () => {
                         value={presupuesto}
                         onChange={onInputChange}
                     />
-                    <input type="submit" value="Añadir" />
+                    <input type="submit" value="Añadir" className="bg-primary hover:bg-primary-focus" />
 
                     {mensaje && <Mensaje tipo="error">{mensaje}</Mensaje>}
                 </div>

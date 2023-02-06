@@ -4,7 +4,7 @@ import InputText from '../../../components/Input/InputText'
 import SelectBox from '../../../components/Input/SelectBox'
 import ErrorText from '../../../components/Typography/ErrorText'
 import { showNotification } from '../../common/headerSlice'
-import { GastoActivo, NuevoGasto, updateGasto } from '../gastosSlice'
+import { clearGastoActive, GastoActivo, NuevoGasto, updateGasto } from '../gastosSlice'
 import { generarID } from '../helpers'
 
 
@@ -29,14 +29,20 @@ const periodOptions = [
 
 
 ]
-
+const gastoOb = {
+    id: '',
+    Nombre: "",
+    Categoria: "",
+    Cantidad: "",
+    Fecha: "",
+}
 
 const AddGasto = ({ closeModal }) => {
     const { active: gasto } = useSelector((state) => state.gasto);
     const dispatch = useDispatch()
     const [loading, setLoading] = useState(false)
     const [errorMessage, setErrorMessage] = useState("")
-    const [gastoObj, setgastoObj] = useState(gasto)
+    const [gastoObj, setgastoObj] = useState(gasto.id ? gasto : gastoOb)
 
     useEffect(() => {
         dispatch(GastoActivo(gastoObj));
@@ -47,6 +53,7 @@ const AddGasto = ({ closeModal }) => {
             //actulizar gasto
             // const gastosActualizados = gastos.map(gastoState => gastoState.id === gasto.id ? gasto : gastoState)
             dispatch(updateGasto(gasto))
+            dispatch(clearGastoActive(gastoOb))
         } else {
             //nuevo Gasto
             let gastoNuevo = { ...gasto }

@@ -44,9 +44,9 @@ const ControlPresupuesto = () => {
         }
     }
     return (
-        <div className="contenedor-presupuesto contenedor sombra dos-columnas">
+        <div className="flex justify-between flex-col md:flex-row">
 
-            <div className=''>
+            <div className='md:w-2/3  m-auto p-2 text-sm  '>
                 <CircularProgressbar
                     styles={buildStyles({
                         pathColor: porcentaje > 100 ? '#DC2626' : '#3B82F6',
@@ -58,7 +58,7 @@ const ControlPresupuesto = () => {
                     text={`${porcentaje}% Gastado`}
                 />
             </div>
-            <div className="contenido-presupuesto">
+            <div className="contenido-presupuesto ml-2 mt-4">
                 <button
                     className="btn btn-primary w-full font-semibold text-white"
                     type="button"
